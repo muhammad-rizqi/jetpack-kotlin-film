@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NontonKuy</string>
+    <string name="data_kosong">Data Kosong</string>
+    <string name="tv_poster">TV Poster</string>
+    <string name="star_icon">star icon</string>
+    <string name="movie_poster">Movie Poster</string>
+</resources>
