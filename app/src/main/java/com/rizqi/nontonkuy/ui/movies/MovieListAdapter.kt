@@ -4,13 +4,26 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rizqi.nontonkuy.R
 import com.rizqi.nontonkuy.data.model.Movie
 import kotlinx.android.synthetic.main.items_movie.view.*
 
-class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
+class MovieListAdapter : PagedListAdapter<Movie, MovieListAdapter.MovieViewHolder>(DIFF_CALLBACK) {
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem.id == newItem.id
+            }
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     private var listMovies = ArrayList<Movie>()
 

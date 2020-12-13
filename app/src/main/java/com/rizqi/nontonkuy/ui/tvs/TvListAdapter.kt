@@ -5,13 +5,26 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rizqi.nontonkuy.R
 import com.rizqi.nontonkuy.data.model.Tv
 import kotlinx.android.synthetic.main.items_tv.view.*
 
-class TvListAdapter : RecyclerView.Adapter<TvListAdapter.TvViewHolder>() {
+class TvListAdapter : PagedListAdapter<Tv, TvListAdapter.TvViewHolder>(DIFF_CALLBACK) {
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Tv>() {
+            override fun areItemsTheSame(oldItem: Tv, newItem: Tv): Boolean {
+                return oldItem.id == newItem.id
+            }
+            override fun areContentsTheSame(oldItem: Tv, newItem: Tv): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     private var listTv = ArrayList<Tv>()
 

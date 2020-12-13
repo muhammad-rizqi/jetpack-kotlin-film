@@ -1,6 +1,7 @@
 package com.rizqi.nontonkuy.data.model
 
 import android.os.Parcelable
+import androidx.annotation.Nullable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -26,7 +27,8 @@ data class Tv (
     val first_air_date : String,
 
     @ColumnInfo(name = "backdrop_path")
-    val backdrop_path : String,
+    @Nullable
+    val backdrop_path : String? = "",
 
     @ColumnInfo(name = "vote_average")
     val vote_average : Double,

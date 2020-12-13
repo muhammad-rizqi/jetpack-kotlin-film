@@ -39,7 +39,7 @@ class DetailMovieViewModelTest {
   }
 
   @Test
-  fun getCourseWithModule() {
+  fun getMovieById() {
     val dummyCourseWithModule = Resource.success(WebServices().getMovies()[0])
     val course = MutableLiveData<Resource<Movie>>()
     course.value = dummyCourseWithModule

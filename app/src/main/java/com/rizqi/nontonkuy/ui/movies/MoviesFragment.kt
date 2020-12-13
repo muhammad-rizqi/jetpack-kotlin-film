@@ -30,12 +30,12 @@ class MoviesFragment : Fragment() {
         val viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         setupRecyclerView()
 
-//        activity?.let {
-//            viewModel.getMovies().observe(it) { movies ->
-//                adapter.setList(movies.results)
-//                progressBar.visibility = View.GONE
-//            }
-//        }
+        activity?.let {
+            viewModel.getMovies().observe(it) { movies ->
+                adapter.submitList(movies.data)
+                progressBar.visibility = View.GONE
+            }
+        }
 
     }
 

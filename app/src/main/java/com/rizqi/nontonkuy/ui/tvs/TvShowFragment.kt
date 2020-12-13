@@ -30,12 +30,12 @@ class TvShowFragment : Fragment() {
     val viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
     setupRecyclerView()
 
-//    activity?.let {
-//      viewModel.getTvs().observe(it) { tvs ->
-//        adapter.setList(tvs)
-//        progressBar.visibility = View.GONE
-//      }
-//    }
+    activity?.let {
+      viewModel.getTvs().observe(it) { tvs ->
+        adapter.submitList(tvs.data)
+        progressBar.visibility = View.GONE
+      }
+    }
   }
 
   private fun setupRecyclerView() {
