@@ -9,7 +9,7 @@ import com.rizqi.nontonkuy.data.repo.Repository
 import com.rizqi.nontonkuy.vo.Resource
 
 class DetailTvViewModel(private val repository: Repository) : ViewModel() {
-  val tvId = MutableLiveData<Int>()
+  private val tvId = MutableLiveData<Int>()
 
   fun setSelectedCourse(id: Int) {
     this.tvId.value = id

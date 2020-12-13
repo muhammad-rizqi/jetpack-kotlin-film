@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.rizqi.nontonkuy.R
@@ -37,7 +38,9 @@ class MovieDetailActivity : AppCompatActivity() {
           Status.LOADING -> movieProgressBar.visibility = View.VISIBLE
           Status.SUCCESS -> if (it.data != null) {
             movieProgressBar.visibility = View.GONE
-            bindToView(movie)
+            bindToView(it.data)
+            val state = it.data.bookmarked
+            setBookmarkState(state)
           }
           Status.ERROR -> {
             movieProgressBar.visibility = View.GONE
@@ -50,8 +53,12 @@ class MovieDetailActivity : AppCompatActivity() {
         }
       }
     }
-  }
 
+    movieFloatingActionButton.setOnClickListener {
+      viewModel.setBookmark()
+    }
+
+  }
 
   private fun bindToView (movie: Movie) {
     Glide.with(this)
@@ -63,5 +70,13 @@ class MovieDetailActivity : AppCompatActivity() {
     movie_overview.text = movie.overview
     movie_vote.text = movie.vote_average.toString()
     title = movie.original_title
+  }
+
+  private fun setBookmarkState(state: Boolean) {
+    if (state) {
+      movieFloatingActionButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24))
+    } else {
+      movieFloatingActionButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_border_24))
+    }
   }
 }
