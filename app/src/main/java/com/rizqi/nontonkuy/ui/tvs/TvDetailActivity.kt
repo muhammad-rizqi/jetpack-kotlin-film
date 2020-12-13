@@ -2,10 +2,16 @@ package com.rizqi.nontonkuy.ui.tvs
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.rizqi.nontonkuy.R
 import com.rizqi.nontonkuy.data.model.Tv
+import com.rizqi.nontonkuy.di.ViewModelFactory
+import com.rizqi.nontonkuy.viewmodel.DetailTvViewModel
+import com.rizqi.nontonkuy.vo.Status
 import kotlinx.android.synthetic.main.activity_tv_detail.*
 
 class TvDetailActivity : AppCompatActivity() {
@@ -19,12 +25,33 @@ class TvDetailActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_tv_detail)
-
+    val factory = ViewModelFactory.getInstance(this)
+    val viewModel = ViewModelProvider(this, factory).get(DetailTvViewModel::class.java)
 
     tv = intent.getParcelableExtra<Tv>(EXTRA_TV) as Tv
 
 
-    bindToView()
+    viewModel.setSelectedCourse(tv.id)
+
+    viewModel.tv.observe(this) {
+      if (it != null) {
+        when (it.status) {
+          Status.LOADING -> tvProgressBar.visibility = View.VISIBLE
+          Status.SUCCESS -> if (it.data != null) {
+            tvProgressBar.visibility = View.GONE
+            bindToView()
+          }
+          Status.ERROR -> {
+            tvProgressBar.visibility = View.GONE
+            Toast.makeText(
+              applicationContext,
+              "Terjadi kesalahan",
+              Toast.LENGTH_SHORT
+            ).show()
+          }
+        }
+      }
+    }
   }
 
 

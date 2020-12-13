@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rizqi.nontonkuy.data.repo.Repository
+import com.rizqi.nontonkuy.viewmodel.DetailMovieViewModel
+import com.rizqi.nontonkuy.viewmodel.DetailTvViewModel
 import com.rizqi.nontonkuy.viewmodel.MainViewModel
 
 class ViewModelFactory private constructor(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
@@ -20,9 +22,15 @@ class ViewModelFactory private constructor(private val repository: Repository) :
 
   @Suppress("UNCHECKED_CAST")
   override fun <T : ViewModel> create(modelClass: Class<T>): T {
-    when {
+    return when {
       modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-        return MainViewModel(repository) as T
+        MainViewModel(repository) as T
+      }
+      modelClass.isAssignableFrom(DetailMovieViewModel::class.java) -> {
+        DetailMovieViewModel(repository) as T
+      }
+      modelClass.isAssignableFrom(DetailTvViewModel::class.java) -> {
+        DetailTvViewModel(repository) as T
       }
       else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
     }

@@ -45,10 +45,10 @@ class MainActivityTest {
     ))
   }
 
-//  @Test
-//  fun loadDetailMovies() {
-//    onView(withId(R.id.rv_movie_list)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-//    onView(withId(R.id.movie_name)).check(matches(isDisplayed()))
+  @Test
+  fun loadDetailMovies() {
+    onView(withId(R.id.rv_movie_list)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+    onView(withId(R.id.movie_name)).check(matches(isDisplayed()))
 //    onView(withId(R.id.movie_name)).check(matches(withText(movies[0].original_title)))
 //
 //    onView(withId(R.id.movie_date)).check(matches(isDisplayed()))
@@ -59,8 +59,8 @@ class MainActivityTest {
 //
 //    onView(withId(R.id.movie_vote)).check(matches(isDisplayed()))
 //    onView(withId(R.id.movie_vote)).check(matches(withText(movies[0].vote_average.toString())))
-//
-//  }
+
+  }
 
   @Test
   fun loadTVs() {
