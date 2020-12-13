@@ -27,4 +27,7 @@ data class Movie (
 
   @ColumnInfo(name = "release_date")
   var release_date: String,
+
+  @ColumnInfo(name = "bookmarked")
+  var bookmarked: Boolean = false,
 ): Parcelable

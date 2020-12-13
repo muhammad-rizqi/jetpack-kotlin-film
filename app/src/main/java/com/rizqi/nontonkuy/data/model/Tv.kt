@@ -33,5 +33,8 @@ data class Tv (
     val overview : String,
 
     @ColumnInfo(name = "poster_path")
-    val poster_path : String
+    val poster_path : String,
+
+    @ColumnInfo(name = "bookmarked")
+    var bookmarked: Boolean = false
 ): Parcelable
