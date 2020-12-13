@@ -1,5 +1,6 @@
 package com.rizqi.nontonkuy.data
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.rizqi.nontonkuy.data.model.Movie
 import com.rizqi.nontonkuy.data.model.Tv
@@ -40,43 +41,7 @@ class LocalDataSource private constructor(private val mMainDao: MainDao) {
         mMainDao.updateTv(tv)
     }
 
-//    fun updateMovie(content: String, moduleId: String) {
-//        mMainDao.updateModuleByContent(content, moduleId)
-//    }
+    fun getTvById(tvId: Int): LiveData<Tv> = mMainDao.getTvById(tvId)
 
-//    fun getAllCourses(): DataSource.Factory<Int, CourseEntity> = mMainDao.getCourses()
-
-//    fun getBookmarkedCourses(): DataSource.Factory<Int, CourseEntity> =
-//            mMainDao.getBookmarkedCourse()
-
-//    fun getCourseWithModules(courseId: String): LiveData<CourseWithModule> =
-//            mMainDao.getCourseWithModuleById(courseId)
-
-//    fun getAllModulesByCourse(courseId: String): LiveData<List<ModuleEntity>> =
-//            mMainDao.getModulesByCourseId(courseId)
-
-//    fun insertCourses(courses: List<CourseEntity>) {
-//        mMainDao.insertCourses(courses)
-//    }
-
-//    fun insertModules(modules: List<ModuleEntity>) {
-//        mMainDao.insertModules(modules)
-//    }
-
-//    fun setCourseBookmark(course: CourseEntity, newState: Boolean) {
-//        course.bookmarked = newState
-//        mMainDao.updateCourse(course)
-//    }
-
-//    fun getModuleWithContent(moduleId: String): LiveData<ModuleEntity> =
-//            mMainDao.getModuleById(moduleId)
-
-//    fun updateContent(content: String, moduleId: String) {
-//        mMainDao.updateModuleByContent(content, moduleId)
-//    }
-
-//    fun setReadModule(module: ModuleEntity) {
-//        module.read = true
-//        mMainDao.updateModule(module)
-//    }
+    fun getMovieById(movieId: Int): LiveData<Movie> = mMainDao.getMovieById(movieId)
 }

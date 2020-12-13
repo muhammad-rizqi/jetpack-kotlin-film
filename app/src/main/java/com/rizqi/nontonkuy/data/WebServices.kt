@@ -1,15 +1,11 @@
 package com.rizqi.nontonkuy.data
 
 import com.google.gson.Gson
-import com.rizqi.nontonkuy.data.model.Movies
-import com.rizqi.nontonkuy.data.model.Tvs
+import com.rizqi.nontonkuy.data.model.Movie
+import com.rizqi.nontonkuy.data.model.Tv
 
 class WebServices {
-    private val tvsData = """{
-    "page": 1,
-    "total_results": 10000,
-    "total_pages": 500,
-    "results": [
+  private val tvsData = """[
         {
             "original_name": "The Mandalorian",
             "genre_ids": [
@@ -417,15 +413,9 @@ class WebServices {
             "overview": "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
             "poster_path": "/wHa6KOJAoNTFLFtp7wguUJKSnju.jpg"
         }
-    ]
-    }""".trimIndent()
+    ]""".trimIndent()
 
-    private val moviesData = """
-        {
-            "page": 1,
-            "total_results": 10000,
-            "total_pages": 500,
-            "results": [
+  private val moviesData = """[
                 {
                     "popularity": 2517.138,
                     "vote_count": 65,
@@ -828,17 +818,16 @@ class WebServices {
                     "overview": "It's Senior year at East Great Falls. Annie, Kayla, Michelle, and Stephanie decide to harness their girl power and band together to get what they want their last year of high school.",
                     "release_date": "2020-10-06"
                 }
-            ]
-        }
-    """.trimIndent()
+            ]""".trimIndent()
 
-    private var gson = Gson()
+  private var gson = Gson()
 
-    fun getTvs(): Tvs {
-        return gson.fromJson(tvsData, Tvs::class.java)
-    }
+  fun getTvs(): List<Tv> {
+    return gson.fromJson(tvsData, Array<Tv>::class.java).toList()
+  }
 
-    fun getMovies(): Movies {
-        return gson.fromJson(moviesData, Movies::class.java)
-    }
+  fun getMovies(): List<Movie> {
+    return gson.fromJson(moviesData, Array<Movie>::class.java)
+      .toList()
+  }
 }

@@ -2,8 +2,8 @@ package com.rizqi.nontonkuy.utils
 
 import android.content.Context
 import com.google.gson.Gson
-import com.rizqi.nontonkuy.data.model.Movies
-import com.rizqi.nontonkuy.data.model.Tvs
+import com.rizqi.nontonkuy.data.model.Movie
+import com.rizqi.nontonkuy.data.model.Tv
 import java.io.IOException
 
 class JsonHelper(private val context: Context) {
@@ -23,12 +23,13 @@ class JsonHelper(private val context: Context) {
     }
   }
 
-  fun loadTvs(): Tvs {
-    return gson.fromJson(parsingFileToString("tvs.json").toString(), Tvs::class.java)
+  fun loadTvs(): List<Tv> {
+    return gson.fromJson(parsingFileToString("tvs.json").toString(), Array<Tv>::class.java).toList()
   }
 
-  fun loadMovies(): Movies {
-    return gson.fromJson(parsingFileToString("movies.json").toString(), Movies::class.java)
+  fun loadMovies(): List<Movie> {
+    return gson.fromJson(parsingFileToString("movies.json").toString(), Array<Movie>::class.java)
+      .toList()
   }
 
 }

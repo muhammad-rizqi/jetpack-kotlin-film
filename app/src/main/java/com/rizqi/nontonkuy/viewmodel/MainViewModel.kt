@@ -1,19 +1,16 @@
 package com.rizqi.nontonkuy.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
+import com.rizqi.nontonkuy.data.model.Movie
+import com.rizqi.nontonkuy.data.model.Tv
 import com.rizqi.nontonkuy.data.repo.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import com.rizqi.nontonkuy.vo.Resource
 
-class MainViewModel(private val repo: Repository) : ViewModel(), CoroutineScope {
+class MainViewModel(private val repo: Repository) : ViewModel() {
 
+  fun getMovies() : LiveData<Resource<PagedList<Movie>>> = repo.getMovies()
 
-  override val coroutineContext = Job() + Dispatchers.Unconfined
-
-
-
-  fun getMovies() = repo.getMovies()
-
-  fun getTvs() = repo.getTvs()
+  fun getTvs() : LiveData<Resource<PagedList<Tv>>> = repo.getTvs()
 }

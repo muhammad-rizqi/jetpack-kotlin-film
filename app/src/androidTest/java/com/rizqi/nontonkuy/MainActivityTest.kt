@@ -41,7 +41,7 @@ class MainActivityTest {
   fun loadMovies() {
     onView(withId(R.id.rv_movie_list)).check(matches(isDisplayed()))
     onView(withId(R.id.rv_movie_list)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-      movies.results.size
+      movies.size
     ))
   }
 
@@ -49,16 +49,16 @@ class MainActivityTest {
   fun loadDetailMovies() {
     onView(withId(R.id.rv_movie_list)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
     onView(withId(R.id.movie_name)).check(matches(isDisplayed()))
-    onView(withId(R.id.movie_name)).check(matches(withText(movies.results[0].original_title)))
+    onView(withId(R.id.movie_name)).check(matches(withText(movies[0].original_title)))
 
     onView(withId(R.id.movie_date)).check(matches(isDisplayed()))
-    onView(withId(R.id.movie_date)).check(matches(withText(movies.results[0].release_date)))
+    onView(withId(R.id.movie_date)).check(matches(withText(movies[0].release_date)))
 
     onView(withId(R.id.movie_overview)).check(matches(isDisplayed()))
-    onView(withId(R.id.movie_overview)).check(matches(withText(movies.results[0].overview)))
+    onView(withId(R.id.movie_overview)).check(matches(withText(movies[0].overview)))
 
     onView(withId(R.id.movie_vote)).check(matches(isDisplayed()))
-    onView(withId(R.id.movie_vote)).check(matches(withText(movies.results[0].vote_average.toString())))
+    onView(withId(R.id.movie_vote)).check(matches(withText(movies[0].vote_average.toString())))
 
   }
 
@@ -67,7 +67,7 @@ class MainActivityTest {
     onView(withText("TV SHOW")).perform(click())
     onView(withId(R.id.rv_tv_list)).check(matches(isDisplayed()))
     onView(withId(R.id.rv_tv_list)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-      tvs.results.size
+      tvs.size
     ))
   }
 
@@ -77,16 +77,16 @@ class MainActivityTest {
 
     onView(withId(R.id.rv_tv_list)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
     onView(withId(R.id.tv_show_name)).check(matches(isDisplayed()))
-    onView(withId(R.id.tv_show_name)).check(matches(withText(tvs.results[0].name)))
+    onView(withId(R.id.tv_show_name)).check(matches(withText(tvs[0].name)))
 
     onView(withId(R.id.tv_first_air_date)).check(matches(isDisplayed()))
-    onView(withId(R.id.tv_first_air_date)).check(matches(withText(tvs.results[0].first_air_date)))
+    onView(withId(R.id.tv_first_air_date)).check(matches(withText(tvs[0].first_air_date)))
 
     onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
-    onView(withId(R.id.tv_overview)).check(matches(withText(tvs.results[0].overview)))
+    onView(withId(R.id.tv_overview)).check(matches(withText(tvs[0].overview)))
 
     onView(withId(R.id.tv_vote_average)).check(matches(isDisplayed()))
-    onView(withId(R.id.tv_vote_average)).check(matches(withText(tvs.results[0].vote_average.toString())))
+    onView(withId(R.id.tv_vote_average)).check(matches(withText(tvs[0].vote_average.toString())))
     onView(withId(R.id.tv_vote_count)).check(matches(isDisplayed()))
 
 
