@@ -41,8 +41,14 @@ class MainViewModelTest {
   private lateinit var observerMovies: Observer<Resource<PagedList<Movie>>>
 
   @Mock
+  private lateinit var observerTvs: Observer<Resource<PagedList<Tv>>>
+
+
+  @Mock
   private lateinit var pagedList: PagedList<Movie>
 
+  @Mock
+  private lateinit var pagedListTv: PagedList<Tv>
 
   @Before
   fun setUp() {
@@ -65,6 +71,24 @@ class MainViewModelTest {
 
     mainViewModel.getMovies().observeForever(observerMovies)
     verify(observerMovies).onChanged(dummyMovie)
+
+  }
+
+  @Test
+  fun getTvs() {
+    val dummyTv = Resource.success(pagedListTv)
+    `when`(dummyTv.data?.size).thenReturn(20)
+    val tvs = MutableLiveData<Resource<PagedList<Tv>>>()
+    tvs.value = dummyTv
+
+    `when`(repository.getTvs()).thenReturn(tvs)
+    val tvEntities = mainViewModel.getTvs().value?.data
+    verify(repository).getTvs()
+    assertNotNull(tvEntities)
+    assertEquals(20, tvEntities?.size)
+
+    mainViewModel.getTvs().observeForever(observerTvs)
+    verify(observerTvs).onChanged(dummyTv)
 
   }
 

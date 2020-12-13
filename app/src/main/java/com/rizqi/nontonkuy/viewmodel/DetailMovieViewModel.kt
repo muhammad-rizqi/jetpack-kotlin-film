@@ -11,7 +11,7 @@ import com.rizqi.nontonkuy.vo.Resource
 class DetailMovieViewModel(private val repository: Repository) : ViewModel() {
   private val movieId = MutableLiveData<Int>()
 
-  fun setSelectedCourse(id: Int) {
+  fun setSelectedMovie(id: Int) {
     this.movieId.value = id
   }
 

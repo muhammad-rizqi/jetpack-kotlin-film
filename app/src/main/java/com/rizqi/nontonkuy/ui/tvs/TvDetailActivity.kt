@@ -32,7 +32,7 @@ class TvDetailActivity : AppCompatActivity() {
     tv = intent.getParcelableExtra<Tv>(EXTRA_TV) as Tv
 
 
-    viewModel.setSelectedCourse(tv.id)
+    viewModel.setSelectedTv(tv.id)
 
     viewModel.tv.observe(this) {
       if (it != null) {

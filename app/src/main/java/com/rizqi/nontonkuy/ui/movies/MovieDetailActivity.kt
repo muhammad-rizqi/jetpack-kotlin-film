@@ -30,7 +30,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
     movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE) as Movie
 
-    viewModel.setSelectedCourse(movie.id)
+    viewModel.setSelectedMovie(movie.id)
 
     viewModel.movie.observe(this) {
       if (it != null) {
