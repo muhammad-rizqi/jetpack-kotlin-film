@@ -25,15 +25,6 @@ class MovieListAdapter : PagedListAdapter<Movie, MovieListAdapter.MovieViewHolde
         }
     }
 
-    private var listMovies = ArrayList<Movie>()
-
-    fun setList(movies: List<Movie>?) {
-        if (movies == null) return
-        listMovies.clear()
-        listMovies.addAll(movies)
-        notifyDataSetChanged()
-    }
-
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
             with(itemView) {
@@ -61,9 +52,7 @@ class MovieListAdapter : PagedListAdapter<Movie, MovieListAdapter.MovieViewHolde
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = listMovies[position]
-        holder.bind(movie)
+        val movie = getItem(position)
+        movie?.let { holder.bind(it) }
     }
-
-    override fun getItemCount(): Int = listMovies.size
 }

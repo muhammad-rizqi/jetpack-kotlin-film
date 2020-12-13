@@ -26,15 +26,6 @@ class TvListAdapter : PagedListAdapter<Tv, TvListAdapter.TvViewHolder>(DIFF_CALL
         }
     }
 
-    private var listTv = ArrayList<Tv>()
-
-    fun setList(tvs: ArrayList<Tv>?) {
-        if (tvs == null) return
-        listTv.clear()
-        listTv.addAll(tvs)
-        notifyDataSetChanged()
-    }
-
     class TvViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bind(tv: Tv) {
@@ -65,9 +56,8 @@ class TvListAdapter : PagedListAdapter<Tv, TvListAdapter.TvViewHolder>(DIFF_CALL
     }
 
     override fun onBindViewHolder(holder: TvViewHolder, position: Int) {
-        val movie = listTv[position]
-        holder.bind(movie)
+        val tv = getItem(position)
+        tv?.let { holder.bind(it) }
     }
 
-    override fun getItemCount(): Int = listTv.size
 }
