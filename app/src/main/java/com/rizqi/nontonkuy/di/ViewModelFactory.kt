@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rizqi.nontonkuy.data.repo.Repository
+import com.rizqi.nontonkuy.viewmodel.BookmarkViewModel
 import com.rizqi.nontonkuy.viewmodel.DetailMovieViewModel
 import com.rizqi.nontonkuy.viewmodel.DetailTvViewModel
 import com.rizqi.nontonkuy.viewmodel.MainViewModel
@@ -31,6 +32,9 @@ class ViewModelFactory private constructor(private val repository: Repository) :
       }
       modelClass.isAssignableFrom(DetailTvViewModel::class.java) -> {
         DetailTvViewModel(repository) as T
+      }
+      modelClass.isAssignableFrom(BookmarkViewModel::class.java) -> {
+        BookmarkViewModel(repository) as T
       }
       else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
     }

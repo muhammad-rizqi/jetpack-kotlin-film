@@ -35,15 +35,15 @@ class MovieDetailActivity : AppCompatActivity() {
     viewModel.movie.observe(this) {
       if (it != null) {
         when (it.status) {
-          Status.LOADING -> movieProgressBar.visibility = View.VISIBLE
+          Status.LOADING -> movieProgressBar?.visibility = View.VISIBLE
           Status.SUCCESS -> if (it.data != null) {
-            movieProgressBar.visibility = View.GONE
+            movieProgressBar?.visibility = View.GONE
             bindToView(it.data)
             val state = it.data.bookmarked
             setBookmarkState(state)
           }
           Status.ERROR -> {
-            movieProgressBar.visibility = View.GONE
+            movieProgressBar?.visibility = View.GONE
             Toast.makeText(
               applicationContext,
               "Terjadi kesalahan",
@@ -54,7 +54,7 @@ class MovieDetailActivity : AppCompatActivity() {
       }
     }
 
-    movieFloatingActionButton.setOnClickListener {
+    movieFloatingActionButton?.setOnClickListener {
       viewModel.setBookmark()
     }
 
@@ -74,9 +74,9 @@ class MovieDetailActivity : AppCompatActivity() {
 
   private fun setBookmarkState(state: Boolean) {
     if (state) {
-      movieFloatingActionButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24))
+      movieFloatingActionButton?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24))
     } else {
-      movieFloatingActionButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_border_24))
+      movieFloatingActionButton?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_border_24))
     }
   }
 }

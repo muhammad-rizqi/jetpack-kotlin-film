@@ -39,13 +39,13 @@ class TvDetailActivity : AppCompatActivity() {
         when (it.status) {
           Status.LOADING -> tvProgressBar?.visibility = View.VISIBLE
           Status.SUCCESS -> if (it.data != null) {
-            tvProgressBar.visibility = View.GONE
+            tvProgressBar?.visibility = View.GONE
             bindToView(it.data)
             val state = it.data.bookmarked
             setBookmarkState(state)
           }
           Status.ERROR -> {
-            tvProgressBar.visibility = View.GONE
+            tvProgressBar?.visibility = View.GONE
             Toast.makeText(
               applicationContext,
               "Terjadi kesalahan",
@@ -60,6 +60,7 @@ class TvDetailActivity : AppCompatActivity() {
     tvFloatingActionButton?.setOnClickListener {
       viewModel.setBookmark()
     }
+
 
   }
 
@@ -79,9 +80,9 @@ class TvDetailActivity : AppCompatActivity() {
 
   private fun setBookmarkState(state: Boolean) {
     if (state) {
-      tvFloatingActionButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24))
+      tvFloatingActionButton?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_24))
     } else {
-      tvFloatingActionButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_border_24))
+      tvFloatingActionButton?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_baseline_favorite_border_24))
     }
   }
 }

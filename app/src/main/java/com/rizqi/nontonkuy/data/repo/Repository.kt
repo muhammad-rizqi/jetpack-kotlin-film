@@ -87,7 +87,7 @@ class Repository(
       .setInitialLoadSizeHint(4)
       .setPageSize(4)
       .build()
-    return LivePagedListBuilder(localDataSource.getAllTvs(), config).build()
+    return LivePagedListBuilder(localDataSource.getBookmarkedTvs(), config).build()
   }
 
   override fun setMovieBookmark(movie: Movie, state: Boolean) {
@@ -102,7 +102,7 @@ class Repository(
       .setInitialLoadSizeHint(4)
       .setPageSize(4)
       .build()
-    return LivePagedListBuilder(localDataSource.getAllMovies(), config).build()
+    return LivePagedListBuilder(localDataSource.getBookmarkedMovies(), config).build()
   }
 
   override fun setTvBookmark(tv: Tv, state: Boolean) {
