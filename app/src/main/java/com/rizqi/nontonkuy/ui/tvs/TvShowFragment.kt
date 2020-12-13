@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rizqi.nontonkuy.R
 import com.rizqi.nontonkuy.di.ViewModelFactory
 import com.rizqi.nontonkuy.viewmodel.MainViewModel
+import com.rizqi.nontonkuy.vo.Status
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 
 class TvShowFragment : Fragment() {
@@ -31,10 +33,21 @@ class TvShowFragment : Fragment() {
     setupRecyclerView()
 
     activity?.let {
-      viewModel.getTvs().observe(it) { tvs ->
-        adapter.submitList(tvs.data)
-        progressBar.visibility = View.GONE
-      }
+      viewModel.getTvs().observe(it, { tvs ->
+        if (tvs != null) {
+          when (tvs.status) {
+            Status.LOADING -> progressBar.visibility = View.VISIBLE
+            Status.SUCCESS -> {
+              progressBar.visibility = View.GONE
+              adapter.submitList(tvs.data)
+            }
+            Status.ERROR -> {
+              progressBar.visibility = View.GONE
+              Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+            }
+          }
+        }
+      })
     }
   }
 

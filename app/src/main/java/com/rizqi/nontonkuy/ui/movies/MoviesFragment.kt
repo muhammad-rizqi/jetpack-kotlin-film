@@ -1,16 +1,17 @@
 package com.rizqi.nontonkuy.ui.movies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rizqi.nontonkuy.R
 import com.rizqi.nontonkuy.di.ViewModelFactory
 import com.rizqi.nontonkuy.viewmodel.MainViewModel
+import com.rizqi.nontonkuy.vo.Status
 import kotlinx.android.synthetic.main.fragment_movies.*
 
 class MoviesFragment : Fragment() {
@@ -32,10 +33,21 @@ class MoviesFragment : Fragment() {
         setupRecyclerView()
 
         activity?.let {
-            viewModel.getMovies().observe(it) { movies ->
-                adapter.submitList(movies.data)
-                progressBar.visibility = View.GONE
-            }
+            viewModel.getMovies().observe(it, { movies ->
+                if (movies != null) {
+                    when (movies.status) {
+                        Status.LOADING -> progressBar.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            progressBar.visibility = View.GONE
+                            adapter.submitList(movies.data)
+                        }
+                        Status.ERROR -> {
+                            progressBar.visibility = View.GONE
+                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            })
         }
 
     }

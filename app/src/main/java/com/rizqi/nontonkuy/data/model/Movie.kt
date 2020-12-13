@@ -1,6 +1,7 @@
 package com.rizqi.nontonkuy.data.model
 
 import android.os.Parcelable
+import androidx.annotation.Nullable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -27,6 +28,10 @@ data class Movie (
 
   @ColumnInfo(name = "release_date")
   var release_date: String,
+
+  @ColumnInfo(name = "backdrop_path")
+  @Nullable
+  val backdrop_path : String? = "",
 
   @ColumnInfo(name = "bookmarked")
   var bookmarked: Boolean = false,
