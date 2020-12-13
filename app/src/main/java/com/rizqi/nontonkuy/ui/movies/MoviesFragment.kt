@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rizqi.nontonkuy.R
 import com.rizqi.nontonkuy.di.ViewModelFactory
@@ -31,12 +30,12 @@ class MoviesFragment : Fragment() {
         val viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         setupRecyclerView()
 
-        activity?.let {
-            viewModel.getMovies().observe(it) { movies ->
-                adapter.setList(movies.results)
-                progressBar.visibility = View.GONE
-            }
-        }
+//        activity?.let {
+//            viewModel.getMovies().observe(it) { movies ->
+//                adapter.setList(movies.results)
+//                progressBar.visibility = View.GONE
+//            }
+//        }
 
     }
 

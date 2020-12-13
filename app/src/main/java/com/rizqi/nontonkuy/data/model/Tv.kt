@@ -3,11 +3,13 @@ package com.rizqi.nontonkuy.data.model
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "tvs")
 @Parcelize
 data class Tv (
+    @PrimaryKey
     @ColumnInfo(name = "id")
     val id : Int,
 

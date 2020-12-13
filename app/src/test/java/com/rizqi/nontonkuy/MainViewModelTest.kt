@@ -3,11 +3,12 @@ package com.rizqi.nontonkuy
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.rizqi.nontonkuy.data.WebServices
-import com.rizqi.nontonkuy.data.model.Movies
-import com.rizqi.nontonkuy.data.model.Tvs
+import androidx.paging.PagedList
+import com.rizqi.nontonkuy.data.model.Movie
+import com.rizqi.nontonkuy.data.model.Tv
 import com.rizqi.nontonkuy.data.repo.Repository
 import com.rizqi.nontonkuy.viewmodel.MainViewModel
+import com.rizqi.nontonkuy.vo.Resource
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,11 +38,11 @@ class MainViewModelTest {
   private lateinit var repository: Repository
 
   @Mock
-  private lateinit var observerMovies: Observer<Movies>
-
+  private lateinit var observerMovies: Observer<Resource<PagedList<Movie>>>
 
   @Mock
-  private lateinit var observerTvs: Observer<Tvs>
+  private lateinit var pagedList: PagedList<Movie>
+
 
   @Before
   fun setUp() {
@@ -51,34 +52,20 @@ class MainViewModelTest {
 
   @Test
   fun getMovies() {
-    val dummyMovie = WebServices().getMovies()
-    val movie = MutableLiveData<Movies>()
+    val dummyMovie = Resource.success(pagedList)
+    `when`(dummyMovie.data?.size).thenReturn(20)
+    val movie = MutableLiveData<Resource<PagedList<Movie>>>()
     movie.value = dummyMovie
 
     `when`(repository.getMovies()).thenReturn(movie)
-    val movieEntities = mainViewModel.getMovies().value
+    val movieEntities = mainViewModel.getMovies().value?.data
     verify(repository).getMovies()
     assertNotNull(movieEntities)
-    assertEquals(20, movieEntities?.results?.size)
+    assertEquals(20, movieEntities?.size)
 
     mainViewModel.getMovies().observeForever(observerMovies)
     verify(observerMovies).onChanged(dummyMovie)
-  }
 
-  @Test
-  fun getTvs() {
-    val dummyTvs = WebServices().getTvs()
-    val tvs = MutableLiveData<Tvs>()
-    tvs.value = dummyTvs
-
-    `when`(repository.getTvs()).thenReturn(tvs)
-    val tvsEntities = mainViewModel.getTvs().value
-    verify(repository).getTvs()
-    assertNotNull(tvsEntities)
-    assertEquals(20, tvsEntities?.results?.size)
-
-    mainViewModel.getTvs().observeForever(observerTvs)
-    verify(observerTvs).onChanged(dummyTvs)
   }
 
 }
