@@ -9,7 +9,6 @@ import java.util.concurrent.Executors
 
 class AppExecutors @VisibleForTesting constructor(
   private val diskIO: Executor,
-  private val networkIO: Executor,
   private val mainThread: Executor
 ) {
 
@@ -19,7 +18,6 @@ class AppExecutors @VisibleForTesting constructor(
 
   constructor() : this(
     Executors.newSingleThreadExecutor(),
-    Executors.newFixedThreadPool(THREAD_COUNT),
     MainThreadExecutor()
   )
 
