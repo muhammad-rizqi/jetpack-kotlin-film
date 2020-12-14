@@ -96,8 +96,6 @@ class MainActivityTest {
   fun loadBookmarks() {
     onView(withId(R.id.menu_favorite)).perform(click())
     onView(withId(R.id.rv_movie_list)).check(matches(isDisplayed()))
-    onView(isRoot()).perform(ViewActions.pressBack())
-    onView(withId(R.id.menu_favorite)).perform(click())
     onView(withText("TV SHOW")).perform(click())
     onView(withId(R.id.rv_tv_list)).check(matches(isDisplayed()))
     onView(isRoot()).perform(ViewActions.pressBack())
