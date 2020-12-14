@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.rizqi.nontonkuy.data.model.Movie
+import com.rizqi.nontonkuy.data.model.Tv
 import com.rizqi.nontonkuy.data.repo.Repository
 import junit.framework.TestCase.assertEquals
 import org.junit.Assert.assertNotNull
@@ -32,7 +33,13 @@ class BookmarkViewModelTest {
   private lateinit var observer: Observer<PagedList<Movie>>
 
   @Mock
+  private lateinit var observerTv: Observer<PagedList<Tv>>
+
+  @Mock
   private lateinit var pagedList: PagedList<Movie>
+
+  @Mock
+  private lateinit var pagedListTv: PagedList<Tv>
 
   @Before
   fun setUp() {
@@ -48,11 +55,28 @@ class BookmarkViewModelTest {
 
     `when`(repository.getBookmarkedMovies()).thenReturn(movies)
     val entities = viewModel.getMovieBookmarks().value
-    verify<Repository>(repository).getBookmarkedMovies()
+    verify(repository).getBookmarkedMovies()
     assertNotNull(entities)
     assertEquals(20, entities?.size)
 
     viewModel.getMovieBookmarks().observeForever(observer)
     verify(observer).onChanged(dummyMovies)
+  }
+
+  @Test
+  fun getTvBookmark() {
+    val dummyTv = pagedListTv
+    `when`(dummyTv.size).thenReturn(20)
+    val tvs = MutableLiveData<PagedList<Tv>>()
+    tvs.value = dummyTv
+
+    `when`(repository.getBookmarkedTvs()).thenReturn(tvs)
+    val entities = viewModel.getTvBookmarks().value
+    verify(repository).getBookmarkedTvs()
+    assertNotNull(entities)
+    assertEquals(20, entities?.size)
+
+    viewModel.getTvBookmarks().observeForever(observerTv)
+    verify(observerTv).onChanged(dummyTv)
   }
 }

@@ -12,13 +12,4 @@ class BookmarkViewModel(private val repository: Repository) : ViewModel() {
 
   fun getTvBookmarks(): LiveData<PagedList<Tv>> = repository.getBookmarkedTvs()
 
-  fun setMovieBookmark(movie: Movie) {
-    val newState = !movie.bookmarked
-    repository.setMovieBookmark(movie, newState)
-  }
-
-  fun setTvBookmark(tv: Tv) {
-    val newState = !tv.bookmarked
-    repository.setTvBookmark(tv, newState)
-  }
 }

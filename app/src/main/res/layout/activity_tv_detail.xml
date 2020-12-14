@@ -96,7 +96,9 @@
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_baseline_favorite_24" />
+            app:srcCompat="@drawable/ic_baseline_favorite_24"
+            android:contentDescription="@string/star_icon"
+            android:focusable="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
